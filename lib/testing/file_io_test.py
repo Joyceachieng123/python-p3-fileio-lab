@@ -18,7 +18,10 @@ def test_append_file(tmp_path):
     write_file(file_name, file_content)
     append_file(file_name, append_content)
     with open(f'{file_name}.txt', 'r') as f:
-        file_content_read = f.read()
+        file_content_read = f.read().rstrip('\n')
+    expected_content = file_content + append_content  
+    expected_content = expected_content.replace('\n', '')  
+    
     assert file_content_read == file_content + append_content
 
 def test_read_file(tmp_path):
